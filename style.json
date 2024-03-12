@@ -24,7 +24,7 @@
       "id": "water-pattern",
       "type": "background",
       "layout": {"visibility": "visible"},
-      "paint": {"background-color": "rgb(40, 75, 99)"}
+      "paint": {"background-color": "rgba(34, 42, 47, 1)"}
     }
   ],
   "id": "jkx64ed"
