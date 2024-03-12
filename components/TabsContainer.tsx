@@ -1,3 +1,4 @@
+import React from 'react';
 import { createMaterialBottomTabNavigator } from 'react-native-paper/react-navigation';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Todos, Radar, Yo } from '../screens';

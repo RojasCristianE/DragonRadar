@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Alert, View } from "react-native";
-import MapLibreGL, { MapView, Camera, UserTrackingMode, UserLocation, MarkerView, PointAnnotation } from '@maplibre/maplibre-react-native';
+import MapLibreGL, { MapView, Camera, UserTrackingMode, UserLocation, PointAnnotation } from '@maplibre/maplibre-react-native';
 import Geolocation from '@react-native-community/geolocation';
 import { Text } from "react-native-paper";
 
@@ -32,23 +32,15 @@ export default () => {
 
     useEffect(() => {
         Geolocation.getCurrentPosition(
-            ({ coords }) => {
-                setLocation(coords);
-            },
-            err => Alert.alert('getCurrentPosition Error', JSON.stringify(err)),
+            ({ coords }: { coords: Location }) => setLocation(coords),
+            (err: any) => Alert.alert('getCurrentPosition Error', JSON.stringify(err)),
             { enableHighAccuracy: true }
         );
 
         const watchId = Geolocation.watchPosition(
-            ({ coords }) => {
-                setLocation(coords);
-            },
-            err => Alert.alert('GetCurrentPosition Error', JSON.stringify(err)),
-            {
-                interval: 5000,
-                enableHighAccuracy: true,
-                useSignificantChanges: true
-            }
+            ({ coords }: { coords: Location }) => setLocation(coords),
+            (err: any) => Alert.alert('GetCurrentPosition Error', JSON.stringify(err)),
+            { interval: 5000, enableHighAccuracy: true, useSignificantChanges: true }
         );
 
         return () => Geolocation.clearWatch(watchId);
@@ -62,6 +54,7 @@ export default () => {
                         style={{ width: "100%", height: "100%" }}
                         styleURL={stylesUrl}
                         attributionEnabled={false}
+                        compassEnabled={false}
                     >
                         <Camera
                             zoomLevel={11}
