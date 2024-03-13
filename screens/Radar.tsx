@@ -1,9 +1,10 @@
-import React, { FC, useEffect, useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
+import React, { FC, useEffect, useState, useRef } from 'react';
+import { Alert, StyleSheet, View, DeviceEventEmitter } from 'react-native';
 import Sound from 'react-native-sound';
 import MapLibreGL, { MapView, Camera, UserTrackingMode, UserLocation, PointAnnotation } from '@maplibre/maplibre-react-native';
 import Geolocation from '@react-native-community/geolocation';
-import { Text } from "react-native-paper";
+import { Text } from 'react-native-paper';
+// import {VolumeControlEvents} from 'react-native-volume-control';
 
 MapLibreGL.setAccessToken(null);
 
@@ -33,16 +34,31 @@ export default () => {
     const lineCount = 50;
     const spacing = 20;
 
+    const handleVolumeDown = () => {
+        // Obtener la referencia a la cámara y disminuir el nivel de zoom
+        // cameraRef.current?.zoomTo(/* Nueva escala de zoom inferior */);
+        Alert.alert('Volume Down');
+    };
+
+    const handleVolumeUp = () => {
+        // Obtener la referencia a la cámara y aumentar el nivel de zoom
+        // cameraRef.current?.zoomTo(/* Nueva escala de zoom superior */);
+        Alert.alert('Volume Up');
+    };
+
     useEffect(() => {
+        // DeviceEventEmitter.addListener('volumeDownPress', handleVolumeDown);
+        // DeviceEventEmitter.addListener('volumeUpPress', handleVolumeUp);
+        // console.log(VolumeControlEvents)
         const sound = new Sound('podcast.ogg', Sound.MAIN_BUNDLE, (error: any) => {
             if (error) {
                 console.error('Error al cargar el sonido', error);
             }
         });
-        console.log(Sound.MAIN_BUNDLE)
+        // console.log(Sound.MAIN_BUNDLE)
         // console.log('duration in seconds: ' + sound.getDuration() + ' number of channels: ' + sound.getNumberOfChannels());
-        
-        sound.play(console.log);
+
+        // sound.play(console.log);
 
         Geolocation.getCurrentPosition(
             ({ coords }: { coords: Location }) => setLocation(coords),
@@ -59,6 +75,7 @@ export default () => {
         return () => {
             Geolocation.clearWatch(watchId);
             sound.release();
+            // DeviceEventEmitter.removeAllListeners;
         };
     }, []);
 
@@ -74,11 +91,11 @@ export default () => {
                             compassEnabled={false}
                         >
                             {/* Modifica el componente para que muestre todos los elementos geoetiquetados */}
-                            
+
                             <Camera
-                                zoomLevel={0}
+                                zoomLevel={12}
                                 centerCoordinate={[location.longitude, location.latitude]}
-                                followUserLocation={true}
+                                // followUserLocation={true}
                                 followUserMode={UserTrackingMode.FollowWithHeading}
                             />
                             <UserLocation

@@ -1,65 +1,25 @@
 {
   "version": 8,
-  "name": "OSM Bright",
+  "name": "OSM Liberty",
   "metadata": {
-    "mapbox:autocomposite": false,
-    "openmaptiles:version": "3.x",
-    "maputnik:renderer": "mlgljs"
+    "maputnik:license": "https://github.com/maputnik/osm-liberty/blob/gh-pages/LICENSE.md",
+    "maputnik:renderer": "mbgljs",
+    "openmaptiles:version": "3.x"
   },
-  "center": [8.542, 47.372],
-  "zoom": 11.6,
-  "bearing": 0,
-  "pitch": 0,
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "scheme": "xyz",
-      "url": "https://tiles.stadiamaps.com/data/openmaptiles.json?api_key=4d1fa321-5e3e-4bfd-8c0f-5db6e88e1b27"
+      "url": "https://api.maptiler.com/tiles/v3/tiles.json?key={key}"
     }
   },
-  "sprite": "https://tiles.stadiamaps.com/styles/osm-bright/sprite",
-  "glyphs": "https://tiles.stadiamaps.com/fonts/{fontstack}/{range}.pbf",
+  "sprite": "https://maputnik.github.io/osm-liberty/sprites/osm-liberty",
+  "glyphs": "https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "background",
       "type": "background",
       "paint": {"background-color": "rgba(40, 75, 99, 1)"}
-    },
-    {
-      "id": "waterway-river",
-      "type": "line",
-      "source": "openmaptiles",
-      "source-layer": "waterway",
-      "filter": ["==", "class", "river"],
-      "layout": {"line-cap": "round", "visibility": "visible"},
-      "paint": {
-        "line-color": "rgba(40, 75, 99, 1)",
-        "line-width": {"base": 1.2, "stops": [[10, 0.8], [20, 6]]}
-      }
-    },
-    {
-      "id": "water-offset",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "water",
-      "minzoom": 6,
-      "maxzoom": 8,
-      "filter": ["==", "$type", "Polygon"],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "fill-opacity": 1,
-        "fill-color": "rgba(40, 75, 99, 1)",
-        "fill-translate": {"base": 1, "stops": [[6, [2, 0]], [8, [0, 0]]]}
-      }
-    },
-    {
-      "id": "water",
-      "type": "fill",
-      "source": "openmaptiles",
-      "source-layer": "water",
-      "layout": {"visibility": "visible"},
-      "paint": {"fill-color": "rgba(40, 75, 99, 1)"}
     }
   ],
-  "id": "fdl9h2n"
+  "id": "osm-liberty"
 }
