@@ -8,7 +8,7 @@ import { Text } from 'react-native-paper';
 
 MapLibreGL.setAccessToken(null);
 
-const stylesUrl = 'https://raw.githubusercontent.com/RojasCristianE/DragonRadar/main/new.json'
+const stylesUrl = 'https://raw.githubusercontent.com/RojasCristianE/DragonRadar/main/newTile.json'
 
 type Location = {
     accuracy: number;
